@@ -522,19 +522,19 @@ header {
 }
 @keyframes slider{
   0%{
-    background-image: url("./images/con1.avif");
+    background-image: url("./images/con1.png");
   }
   25%{
-    background-image: url("./images/con2.avif");
+    background-image: url("./images/con2.png");
   }
   50%{
-    background-image: url("./images/con3.avif");
+    background-image: url("./images/con3.png");
   }
   75%{
-    background-image: url("./images/con4.avif");
+    background-image: url("./images/con4.png");
   }
   100%{
-    background-image: url("./images/con1.avif");
+    background-image: url("./images/con5.png");
   }
 }
 
