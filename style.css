@@ -520,6 +520,9 @@ header {
   padding: 1.5rem;
   animation: slider 10s linear infinite;
 }
+#cowOptions{
+  display: none;
+}
 @keyframes slider{
   0%{
     background-image: url("./images/con1.png");
