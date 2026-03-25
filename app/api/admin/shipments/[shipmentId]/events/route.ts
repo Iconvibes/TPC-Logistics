@@ -19,7 +19,11 @@ const requireAdmin = async (request: NextRequest) => {
   return session
 }
 
-export async function POST(request: NextRequest, context: { params: { shipmentId: string } }) {
+export async function POST(
+  request: NextRequest,
+  { params }: { params: Promise<{ shipmentId: string }> },
+) {
+  const { shipmentId } = await params
   const session = await requireAdmin(request)
   if (!session) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
@@ -32,7 +36,7 @@ export async function POST(request: NextRequest, context: { params: { shipmentId
   }
 
   const shipment = await prisma.shipment.findUnique({
-    where: { id: context.params.shipmentId },
+    where: { id: shipmentId },
     select: { id: true },
   })
   if (!shipment) {
@@ -43,7 +47,7 @@ export async function POST(request: NextRequest, context: { params: { shipmentId
 
   const event = await prisma.trackingUpdate.create({
     data: {
-      shipmentId: context.params.shipmentId,
+      shipmentId,
       location: parsed.data.location,
       status: parsed.data.status,
       timestamp,
@@ -52,7 +56,7 @@ export async function POST(request: NextRequest, context: { params: { shipmentId
   })
 
   await prisma.shipment.update({
-    where: { id: context.params.shipmentId },
+    where: { id: shipmentId },
     data: { status: parsed.data.status },
   })
 
