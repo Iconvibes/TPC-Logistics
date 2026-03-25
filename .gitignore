@@ -12,12 +12,25 @@ dist
 dist-ssr
 *.local
 .env
+.env.*
+!.env.example
 .env.*.local
+.envrc
 .next
 dev.db
 dev.db-journal
 prisma/dev.db
 prisma/dev.db-journal
+*.db
+*.db-journal
+*.sqlite
+*.sqlite3
+*.pem
+*.key
+*.p12
+*.pfx
+.netlify
+.vercel
 
 # Editor directories and files
 .vscode/*
