@@ -1,0 +1,76 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+body {
+  @apply bg-navy-900 text-white font-sans antialiased;
+}
+
+main {
+  @apply bg-navy-900;
+}
+
+::selection {
+  background: rgba(47, 143, 255, 0.35);
+  color: #ffffff;
+}
+
+@layer components {
+  .page-container {
+    @apply mx-auto w-full max-w-6xl px-6;
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes glow-pulse {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+@layer utilities {
+  .animate-fade-up {
+    animation: fade-up 0.9s ease-out both;
+  }
+
+  .animate-fade-up-delay {
+    animation: fade-up 1s ease-out 0.15s both;
+  }
+
+  .animate-glow {
+    animation: glow-pulse 4s ease-in-out infinite;
+  }
+}
+
+:focus-visible {
+  outline: 2px solid rgba(47, 143, 255, 0.7);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-up,
+  .animate-fade-up-delay,
+  .animate-glow {
+    animation: none;
+  }
+}

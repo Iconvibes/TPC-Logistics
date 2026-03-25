@@ -1,0 +1,29 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+body {
+  @apply bg-navy-900 text-white antialiased font-sans;
+}
+
+main {
+  @apply bg-navy-900;
+}
+
+::selection {
+  background: rgba(47, 143, 255, 0.35);
+  color: #ffffff;
+}
+
+@layer components {
+  .page-container {
+    @apply mx-auto w-full max-w-6xl px-6;
+  }
+}
+

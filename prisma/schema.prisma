@@ -1,0 +1,89 @@
+// Prisma schema for TPC Logistics
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  CLIENT
+}
+
+enum FreightMode {
+  AIR
+  OCEAN
+  ROAD
+  RAIL
+  MULTIMODAL
+}
+
+enum TrackingStatus {
+  CREATED
+  BOOKED
+  PICKED_UP
+  IN_TRANSIT
+  AT_PORT
+  AT_CUSTOMS
+  OUT_FOR_DELIVERY
+  DELIVERED
+  DELAYED
+  EXCEPTION
+  CANCELLED
+}
+
+model User {
+  id           String    @id @default(uuid())
+  email        String    @unique
+  name         String?
+  phone        String?
+  passwordHash String
+  role         Role      @default(CLIENT)
+  isActive     Boolean   @default(true)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  shipments    Shipment[]
+
+  @@index([role])
+}
+
+model Shipment {
+  id             String           @id @default(uuid())
+  trackingNumber String           @unique
+  clientId       String
+  origin         String
+  destination    String
+  weight         Float
+  freightMode    FreightMode
+  description    String?
+  status         TrackingStatus   @default(CREATED)
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+
+  client         User             @relation(fields: [clientId], references: [id])
+  trackingEvents TrackingUpdate[]
+
+  @@index([clientId])
+  @@index([freightMode])
+  @@index([status])
+}
+
+model TrackingUpdate {
+  id         String         @id @default(uuid())
+  shipmentId String
+  location   String
+  status     TrackingStatus
+  timestamp  DateTime
+  notes      String?
+  createdAt  DateTime       @default(now())
+
+  shipment   Shipment       @relation(fields: [shipmentId], references: [id], onDelete: Cascade)
+
+  @@index([shipmentId, timestamp])
+  @@index([status])
+}
