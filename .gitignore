@@ -16,7 +16,6 @@ dist-ssr
 !.env.example
 .env.*.local
 .envrc
-.next
 dev.db
 dev.db-journal
 prisma/dev.db

@@ -15,24 +15,22 @@
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "incremental": true,
     "types": [
-      "node"
-    ],
-    "plugins": [
-      {
-        "name": "next"
-      }
+      "node",
+      "vite/client"
     ]
   },
   "include": [
-    "**/*.ts",
-    "**/*.tsx",
-    "next-env.d.ts",
-    ".next/types/**/*.ts"
+    "src/**/*",
+    "server/**/*",
+    "lib/**/*",
+    "prisma/**/*",
+    "**/*.d.ts"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "dist"
   ]
 }

@@ -103,7 +103,7 @@ export default function QuotePage() {
                   <span className={`text-sm ${index <= step ? 'text-white' : 'text-slategray-400'}`}>
                     {label}
                   </span>
-                  {index < steps.length - 1 ? <span className="text-slategray-600">></span> : null}
+                  {index < steps.length - 1 ? <span className="text-slategray-600">&gt;</span> : null}
                 </div>
               ))}
             </div>
